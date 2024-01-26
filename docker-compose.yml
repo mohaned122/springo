@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: mohanned
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgres/data
+    networks:
+      - spring-boot-net
+
+  spring-boot-app:
+    container_name: springo
+    image: springboot
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-boot-net
+    depends_on:
+      - postgres
+
+volumes:
+  postgres:
+
+networks:
+  spring-boot-net:  # Fix: Use consistent network name
+    driver: bridge
