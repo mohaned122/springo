@@ -18,7 +18,10 @@ jobs:
           distribution: 'corretto'
           java-version: '17'
 
+      - name: testing
+        run: mvn -B package --file pom.xml
+
       - name: build app
         run: |
           mvn clean
-          mvn -b package --file pom.xml
+          mvn -B package --file pom.xml
