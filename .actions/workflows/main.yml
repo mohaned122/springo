@@ -6,4 +6,19 @@ on:
 
 jobs:
   build-deploy:
-    name:
+    name: preparation and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: ckeckout code
+        uses: actions/checkout@v4
+
+      - name: step up java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+      - name: build app
+        run: |
+          mvn clean
+          mvn -b package --file pom.xml
